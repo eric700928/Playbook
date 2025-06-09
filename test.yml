@@ -1,0 +1,12 @@
+---
+- name: Create test.txt file in /etc
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure test.txt is created with content 'test'
+      copy:
+        dest: /etc/test.txt
+        content: "test\n"
+        owner: root
+        group: root
+        mode: '0644'
