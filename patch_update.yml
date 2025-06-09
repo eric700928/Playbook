@@ -19,3 +19,7 @@
       args:
         warn: false
 
+    - name: Reboot the system if updates were applied
+      reboot:
+        reboot_timeout: 600
+      when: apt_result is succeeded
