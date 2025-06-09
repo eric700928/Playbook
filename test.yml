@@ -1,12 +1,20 @@
 ---
-- name: Create test.txt file in /etc
+- name: Create test.txt file in /home/dgcadmin/test
   hosts: all
   become: true
   tasks:
+    - name: Ensure /home/dgcadmin/test directory exists
+      file:
+        path: /home/dgcadmin/test
+        state: directory
+        owner: dgcadmin
+        group: dgcadmin
+        mode: '0755'
+
     - name: Ensure test.txt is created with content 'test'
       copy:
-        dest: /etc/test.txt
+        dest: /home/dgcadmin/test/test.txt
         content: "test\n"
-        owner: root
-        group: root
+        owner: dgcadmin
+        group: dgcadmin
         mode: '0644'
