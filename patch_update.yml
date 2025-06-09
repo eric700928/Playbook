@@ -2,18 +2,19 @@
 - name: Apply security patches on Ubuntu
   hosts: all
   become: true
-  become_user: dgcadmin
   tasks:
     - name: Update APT package cache
       apt:
         update_cache: yes
         cache_valid_time: 3600
-  register: apt_result
-  until: apt_result is succeeded
-  retries: 5
-  delay: 10 
+      register: apt_result
+      until: apt_result is succeeded
+      retries: 5
+      delay: 10
+
     - name: Upgrade only security updates
       shell: |
         apt list --upgradable 2>/dev/null | grep -i security | cut -d/ -f1 | xargs -r apt-get install -y
       args:
         warn: false
+
