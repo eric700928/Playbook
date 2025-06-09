@@ -1,6 +1,8 @@
 ---
 - name: Create test.txt file in /home/dgcadmin/test
   hosts: all
+  become: true
+  become_user: dgcadmin
   tasks:
     - name: Ensure /home/dgcadmin/test directory exists
       file:
